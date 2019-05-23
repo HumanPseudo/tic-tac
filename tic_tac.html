@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tic tac</title>
+	<style type="text/css" media="screen">
+		.myBox{
+			width: 100px;
+			height: 100px;
+			background-color: rgba(0,0,0,0.5);
+			float: left;
+			color: white;
+			text-align: center;
+			display: flex;
+   			justify-content: center;
+   			align-items: center;
+   			font-size: 40px;
+   			font-family: "arial";
+		}
+
+		.myBox:hover{
+			background-color: #0895C3;
+		}
+
+		.dragElement{
+			width: 100px;
+			height: 100px;
+			background-color: #0895C3;
+			float: left;
+			display: flex;
+   			justify-content: center;
+   			align-items: center;
+   			color: #ffffff;
+   			font-size: 40px;
+   			font-family: "arial";
+		}
+
+		.dragElement:hover{
+			background-color: #3A3A3A;
+		}	
+
+		.turno{
+			color: white;
+			background-color: black;
+			text-align: center;
+			width: 100%;
+			height: 50px;
+			display: flex;
+   			justify-content: center;
+   			align-items: center;
+		}
+
+	</style>			
+	<script src="external/jquery/jquery.js"></script>
+	<script src="jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(
+			function() {
+				var turno = $(".turno");
+				var strPlayer = "O";
+
+				var b1 = $("#box1");
+				var b2 = $("#box2");
+				var b3 = $("#box3");
+				var b4 = $("#box4");
+				var b5 = $("#box5");
+				var b6 = $("#box6");
+				var b7 = $("#box7");
+				var b8 = $("#box8");
+				var b9 = $("#box9");
+
+				b1.css({left:50, top:50 ,position:'absolute'});	
+				b2.css({left:150, top:50 ,position:'absolute'});	
+				b3.css({left:250, top:50 ,position:'absolute'});
+
+				b4.css({left:50, top:150 ,position:'absolute'});	
+				b5.css({left:150, top:150 ,position:'absolute'});	
+				b6.css({left:250, top:150 ,position:'absolute'});	
+
+				b7.css({left:50, top:250 ,position:'absolute'});	
+				b8.css({left:150, top:250 ,position:'absolute'});	
+				b9.css({left:250, top:250 ,position:'absolute'});
+
+				var player1 = $("#player1");
+				var player2 = $("#player2");
+
+				var p1Pos = [100,400];
+				var p2Pos = [250,400];
+
+				$(".myBox").mouseup(function(){
+  					if (turno.html() == "Jugador 1" && $(this).html()=="" && strPlayer == "X") {
+  						$(this).html(strPlayer);
+  						turno.html("Jugador 2");
+  					}
+  					else if (turno.html() == "Jugador 2" && $(this).html()=="" && strPlayer == "O") {
+  						$(this).html(strPlayer);
+  						turno.html("Jugador 1");
+  					}
+				});
+
+
+				$(".dragElement").draggable({
+					drag:function(){
+						var e = $(this);		
+						strPlayer = $(this).html();		
+					},
+
+					stop:function(){
+						var e = $(this);	
+						if (e.html() == "X") {
+							e.css({left:p1Pos[0], top:p1Pos[1] ,position:'absolute'});
+						}
+						else{
+							e.css({left:p2Pos[0], top:p2Pos[1] ,position:'absolute'});
+						}
+					}
+				});									
+			}
+		);
+	</script>
+</head>
+<body>
+
+		<div class="turno">Jugador 1</div>
+
+		<div class="dragElement" id="player1">X</div>
+		<div class="dragElement" id="player2">O</div>
+		
+		<div class="myBox" id="box1"></div>
+		<div class="myBox" id="box2"></div>
+		<div class="myBox" id="box3"></div>
+		<div class="myBox" id="box4"></div>
+		<div class="myBox" id="box5"></div>
+		<div class="myBox" id="box6"></div>
+		<div class="myBox" id="box7"></div>
+		<div class="myBox" id="box8"></div>
+		<div class="myBox" id="box9"></div>	
+	
+</body>
+</html>
